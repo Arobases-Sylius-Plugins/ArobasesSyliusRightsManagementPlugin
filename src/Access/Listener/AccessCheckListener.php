@@ -9,7 +9,7 @@ use Arobases\SyliusRightsManagementPlugin\Access\Checker\AdminUserAccessChecker;
 use Arobases\SyliusRightsManagementPlugin\Provider\CurrentAdminUserProvider;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -22,16 +22,21 @@ class AccessCheckListener
 
     private AdminRouteChecker $adminRouteAccessChecker;
 
-    private Session $session;
+    private RequestStack $requestStack;
 
     private RouterInterface $router;
 
-    public function __construct(CurrentAdminUserProvider $currentAdminUserProvider, AdminUserAccessChecker $adminUserAccessChecker, AdminRouteChecker $adminRouteAccessChecker, Session $session, RouterInterface $router)
-    {
+    public function __construct(
+        CurrentAdminUserProvider $currentAdminUserProvider,
+        AdminUserAccessChecker $adminUserAccessChecker,
+        AdminRouteChecker $adminRouteAccessChecker,
+        RequestStack $requestStack,
+        RouterInterface $router
+    ) {
         $this->currentAdminUserProvider = $currentAdminUserProvider;
         $this->adminUserAccessChecker = $adminUserAccessChecker;
         $this->adminRouteAccessChecker = $adminRouteAccessChecker;
-        $this->session = $session;
+        $this->requestStack = $requestStack;
         $this->router = $router;
     }
 
@@ -82,7 +87,7 @@ class AccessCheckListener
 
     protected function redirectUser(string $route, string $message): RedirectResponse
     {
-        $this->session->getFlashBag()->add('error', $message);
+        $this->requestStack->getSession()->getFlashBag()->add('error', $message);
 
         return new RedirectResponse($route);
     }

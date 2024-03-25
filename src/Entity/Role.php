@@ -45,7 +45,7 @@ class Role implements ResourceInterface, CodeAwareInterface
     /**
      * @ORM\OneToMany(targetEntity="Sylius\Component\Core\Model\AdminUserInterface",
      *     mappedBy="role", fetch="EXTRA_LAZY",
-     *     cascade={"persist", "remove"}
+     *     cascade={"persist"}
      *      )
      */
     protected Collection $adminUsers;

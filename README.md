@@ -1,3 +1,5 @@
+PS: All modifications on the forks are based on clmntb/ArobasesSyliusRightsManagementPlugin
+
 # Arobases Sylius Rights Management Plugin
 
 This plugin allows you to manage the rights and roles of administrator users

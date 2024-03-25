@@ -28,12 +28,26 @@ class CreateAdminRightCommand extends Command
 
     protected RightRepository $rightRepository;
 
-    public function __construct(EntityManagerInterface $manager, RightAdapter $rightAdapter, RightGroupRepository $groupRightRepository, RightRepository $rightRepository)
-    {
+    protected string $defaultAdminUser;
+    protected string $defaultAdminRoleCode;
+    protected string $defaultAdminRoleName;
+
+    public function __construct(
+        EntityManagerInterface $manager,
+        RightAdapter $rightAdapter,
+        RightGroupRepository $groupRightRepository,
+        RightRepository $rightRepository,
+        string $defaultAdminUser,
+        string $defaultAdminRoleCode,
+        string $defaultAdminRoleName
+    ) {
         $this->manager = $manager;
         $this->rightAdapter = $rightAdapter;
         $this->groupRightRepository = $groupRightRepository;
         $this->rightRepository = $rightRepository;
+        $this->defaultAdminUser = $defaultAdminUser;
+        $this->defaultAdminRoleCode = $defaultAdminRoleCode;
+        $this->defaultAdminRoleName = $defaultAdminRoleName;
         parent::__construct();
     }
 
@@ -45,9 +59,9 @@ class CreateAdminRightCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $administratorRole = null;
-        $defaultAdminUser = getenv('DEFAULT_ADMIN_USER');
-        $defaultAdminRoleCode = getenv('DEFAULT_ADMIN_ROLE_CODE');
-        $defaultAdminRoleName = getenv('DEFAULT_ADMIN_ROLE_NAME');
+        $defaultAdminUser = $this->defaultAdminUser;
+        $defaultAdminRoleCode = $this->defaultAdminRoleCode;
+        $defaultAdminRoleName = $this->defaultAdminRoleName;
         if ($defaultAdminUser && $defaultAdminRoleCode && $defaultAdminRoleName) {
             $adminUser = $this->manager->getRepository(AdminUserInterface::class)->findOneBy(['username' => $defaultAdminUser]);
             if ($adminUser) {

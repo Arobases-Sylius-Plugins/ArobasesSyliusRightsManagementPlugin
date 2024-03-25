@@ -49,6 +49,9 @@ services:
       - '@arobases_sylius_rights_management_plugin.adapter.right_adapter'
       - '@arobases_sylius_rights_management_plugin.repository.right_group'
       - '@arobases_sylius_rights_management_plugin.repository.right'
+      - '%default_admin_user%'
+      - '%default_admin_role_code%'
+      - '%default_admin_role_name%'
     tags:
       - { name: console.command }
 
@@ -63,7 +66,7 @@ services:
       - '@arobases_sylius_rights_management_plugin.provider.current_admin_user_provider'
       - '@arobases_sylius_rights_management_plugin.checker.admin_user_access_checker'
       - '@arobases_sylius_rights_management_plugin.checker.admin_route_checker'
-      - '@session'
+      - '@request_stack'
       - '@Symfony\Component\Routing\RouterInterface'
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
