@@ -1,3 +1,12 @@
 {
-  "entrypoints": {}
+  "entrypoints": {
+    "admin-entry": {
+      "css": [
+        "/build/admin/admin-entry.css"
+      ],
+      "js": [
+        "/build/admin/admin-entry.js"
+      ]
+    }
+  }
 }

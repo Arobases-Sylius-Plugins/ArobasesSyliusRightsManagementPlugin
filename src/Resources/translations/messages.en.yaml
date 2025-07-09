@@ -1,32 +1,39 @@
 arobases_sylius_rights_management_plugin:
     rights:
-        taxon: Taxon
-        product: Product
-        inventory: Inventory
-        order: Order
-        promotion: Promotion
-        customer: Customer
-        channel: Channel
-        country: Country
-        zone: Zone
-        currency: Currency
-        exchange_rate: Exchange rate
-        locale: Locale
-        payment_method: Payment method
-        shipping_method: Shipping method
-        shipping_category: Shipping category
-        tax_category: Tax category
-        tax_rate: Tax rate
-        admin_user: Admin user
-        admin_role: Admin role
+        taxons: Taxons
+        products: Products
+        inventory: Inventories
+        attributes: Attributes
+        options: Options
+        association_types: Association types
+        orders: Orders
+        payments: Payments
+        shipments: Shipments
+        customers: Customers
+        customer_groups: Groups
+        cart_promotions: Cart promotions
+        catalog_promotions: Catalog promotions
+        product_reviews: Product reviews
+        channels: Channels
+        countries: Countries
+        zones: Zones
+        currencies: Currencies
+        exchange_rates: Exchange rates
+        locales: Locales
+        payment_methods: Payment methods
+        shipping_methods: Shipping methods
+        shipping_categories: Shipping categories
+        tax_categories: Tax categories
+        tax_rates: Tax rates
+        admin_users: Administrators
+        admin_roles: Roles
+
     group:
-        taxon: Taxon
-        product: Product
-        order: Order
-        promotion: Promotion
-        user: User
+        catalog: Catalog
+        sales: Sales
+        customer: Customer
+        marketing: Marketing
         configuration: Configuration
-        administration: Administration
     ui:
         edit_role: Edit role
         roles: Roles

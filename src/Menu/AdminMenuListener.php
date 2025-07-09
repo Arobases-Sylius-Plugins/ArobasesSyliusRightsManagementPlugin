@@ -30,10 +30,21 @@ final class AdminMenuListener implements AdminMenuListenerInterface
         ])->setLabel('arobases_sylius_rights_management_plugin.menu.admin.roles')->setLabelAttribute('icon', 'users');
 
         foreach ($menu->getChildren() as $rootChildren) {
+            $displayRootChildren = false;
             foreach ($rootChildren->getChildren() as $children) {
-                if (!$this->adminUserAccessChecker->isUserGranted($this->currentAdminUserProvider->getCurrentAdminUser(), $children->getExtra('routes')[0]['route'])) {
-                    $rootChildren->removeChild($children);
+                 if(!$children->getExtra('routes')) {
+                    continue;
                 }
+                 foreach($children->getExtra('routes') as $route) {
+                     if (!$this->adminUserAccessChecker->isUserGranted($this->currentAdminUserProvider->getCurrentAdminUser(), $route['route'])) {
+                         $rootChildren->removeChild($children);
+                     } else{
+                         $displayRootChildren = true;
+                     }
+                 }
+            }
+            if(!$displayRootChildren) {
+                $menu->removeChild($rootChildren);
             }
         }
     }

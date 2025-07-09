@@ -1,0 +1,2 @@
+imports:
+  - { resource: "@ArobasesSyliusRightsManagementPlugin/Resources/config/config.yaml" }

@@ -59,6 +59,8 @@ services:
 
   arobases_sylius_rights_management_plugin.listener.access_check_listener:
     class: Arobases\SyliusRightsManagementPlugin\Access\Listener\AccessCheckListener
+    autowire: true
+    autoconfigure: true
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
       
