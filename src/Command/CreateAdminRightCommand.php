@@ -45,9 +45,10 @@ class CreateAdminRightCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $administratorRole = null;
-        $defaultAdminUser = getenv('DEFAULT_ADMIN_USER');
-        $defaultAdminRoleCode = getenv('DEFAULT_ADMIN_ROLE_CODE');
-        $defaultAdminRoleName = getenv('DEFAULT_ADMIN_ROLE_NAME');
+        $defaultAdminUser = $_ENV['DEFAULT_ADMIN_USER'];
+        $defaultAdminRoleCode = $_ENV['DEFAULT_ADMIN_ROLE_CODE'];
+        $defaultAdminRoleName = $_ENV['DEFAULT_ADMIN_ROLE_NAME'];
+
         if ($defaultAdminUser && $defaultAdminRoleCode && $defaultAdminRoleName) {
             $adminUser = $this->manager->getRepository(AdminUserInterface::class)->findOneBy(['username' => $defaultAdminUser]);
             if ($adminUser) {
