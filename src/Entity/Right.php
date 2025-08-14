@@ -12,6 +12,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @ORM\Entity
+ *
  * @ORM\Table(name="arobases_sylius_rights_management_right")
  */
 class Right implements ResourceInterface
@@ -20,7 +21,9 @@ class Right implements ResourceInterface
 
     /**
      * @ORM\Id()
+     *
      * @ORM\GeneratedValue()
+     *
      * @ORM\Column(type="integer")
      */
     protected ?int $id = null;
@@ -34,6 +37,7 @@ class Right implements ResourceInterface
      *     fetch="EXTRA_LAZY",
      *      cascade={"persist", "remove"}
      * )
+     *
      * * @ORM\JoinTable(name="arobases_sylius_rights_management_right_role",
      *      joinColumns={@ORM\JoinColumn(name="right_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}

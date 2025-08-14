@@ -13,6 +13,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @ORM\Entity
+ *
  * @ORM\Table(name="arobases_sylius_right_management_role")
  */
 class Role implements ResourceInterface, CodeAwareInterface
@@ -24,7 +25,9 @@ class Role implements ResourceInterface, CodeAwareInterface
 
     /**
      * @ORM\Id()
+     *
      * @ORM\GeneratedValue()
+     *
      * @ORM\Column(type="integer")
      */
     protected ?int $id = null;
@@ -35,6 +38,7 @@ class Role implements ResourceInterface, CodeAwareInterface
     /**
      * @ORM\ManyToMany(targetEntity="Arobases\SyliusRightsManagementPlugin\Entity\Right",
      *     mappedBy="roles", fetch="EXTRA_LAZY")
+     *
      * @ORM\JoinTable(name="arobases_sylius_rights_management_right_role",
      *      joinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="right_id", referencedColumnName="id")}

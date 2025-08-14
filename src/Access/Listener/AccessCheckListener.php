@@ -26,7 +26,6 @@ class AccessCheckListener implements AccessCheckListenerInterface
 
     private RouterInterface $router;
 
-
     public function __construct(CurrentAdminUserProviderInterface $currentAdminUserProvider, AdminUserAccessCheckerInterface $adminUserAccessChecker, AdminRouteCheckerInterface $adminRouteAccessChecker, RequestStack $requestStack, RouterInterface $router)
     {
         $this->currentAdminUserProvider = $currentAdminUserProvider;
@@ -35,7 +34,6 @@ class AccessCheckListener implements AccessCheckListenerInterface
         $this->requestStack = $requestStack;
         $this->router = $router;
     }
-
 
     public function onKernelRequest(RequestEvent $event): void
     {

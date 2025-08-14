@@ -14,6 +14,7 @@ trait AdminUserTrait
      *     fetch="EXTRA_LAZY",
      *     cascade={"persist"}
      * )
+     *
      * @ORM\JoinColumn(name="role_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected ?Role $role = null;

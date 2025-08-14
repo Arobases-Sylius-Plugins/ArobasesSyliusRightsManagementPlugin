@@ -14,13 +14,11 @@ final class AdminMenuListener implements AdminMenuListenerInterface
 
     private CurrentAdminUserProviderInterface $currentAdminUserProvider;
 
-
     public function __construct(AdminUserAccessCheckerInterface $adminUserAccessChecker, CurrentAdminUserProviderInterface $currentAdminUserProvider)
     {
         $this->adminUserAccessChecker = $adminUserAccessChecker;
         $this->currentAdminUserProvider = $currentAdminUserProvider;
     }
-
 
     public function addAdminMenuItems(MenuBuilderEvent $event): void
     {
@@ -32,18 +30,18 @@ final class AdminMenuListener implements AdminMenuListenerInterface
         foreach ($menu->getChildren() as $rootChildren) {
             $displayRootChildren = false;
             foreach ($rootChildren->getChildren() as $children) {
-                 if(!$children->getExtra('routes')) {
+                if (!$children->getExtra('routes')) {
                     continue;
                 }
-                 foreach($children->getExtra('routes') as $route) {
-                     if (!$this->adminUserAccessChecker->isUserGranted($this->currentAdminUserProvider->getCurrentAdminUser(), $route['route'])) {
-                         $rootChildren->removeChild($children);
-                     } else{
-                         $displayRootChildren = true;
-                     }
-                 }
+                foreach ($children->getExtra('routes') as $route) {
+                    if (!$this->adminUserAccessChecker->isUserGranted($this->currentAdminUserProvider->getCurrentAdminUser(), $route['route'])) {
+                        $rootChildren->removeChild($children);
+                    } else {
+                        $displayRootChildren = true;
+                    }
+                }
             }
-            if(!$displayRootChildren) {
+            if (!$displayRootChildren) {
                 $menu->removeChild($rootChildren);
             }
         }

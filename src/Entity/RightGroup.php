@@ -10,13 +10,16 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @ORM\Entity
+ *
  * @ORM\Table(name="arobases_sylius_rights_management_right_group")
  */
 class RightGroup implements ResourceInterface
 {
     /**
      * @ORM\Id()
+     *
      * @ORM\GeneratedValue()
+     *
      * @ORM\Column(type="integer")
      */
     protected ?int $id = null;
