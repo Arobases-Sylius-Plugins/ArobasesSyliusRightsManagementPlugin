@@ -1,0 +1,14 @@
+{% set form = hookable_metadata.context.form %}
+
+{% if form.role is defined %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <div class="card-title">
+                {{ 'arobases_sylius_rights_management_plugin.ui.choice_role'|trans }}
+            </div>
+        </div>
+        <div class="card-body">
+            {{ form_row(form.role) }}
+        </div>
+    </div>
+{% endif %}

@@ -12,14 +12,14 @@ use Arobases\SyliusRightsManagementPlugin\Repository\Group\RightGroupRepository;
 use Arobases\SyliusRightsManagementPlugin\Repository\Right\RightRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'arobases:right:create-admin-right', description: 'Creates the rights groups and rights from the configuration')]
 class CreateAdminRightCommand extends Command
 {
-    protected static $defaultName = 'arobases:right:create-admin-right';
-
     protected EntityManagerInterface $manager;
 
     protected RightAdapter $rightAdapter;
@@ -45,9 +45,9 @@ class CreateAdminRightCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $administratorRole = null;
-        $defaultAdminUser = $_ENV['DEFAULT_ADMIN_USER'];
-        $defaultAdminRoleCode = $_ENV['DEFAULT_ADMIN_ROLE_CODE'];
-        $defaultAdminRoleName = $_ENV['DEFAULT_ADMIN_ROLE_NAME'];
+        $defaultAdminUser = $_ENV['DEFAULT_ADMIN_USER'] ?? null;
+        $defaultAdminRoleCode = $_ENV['DEFAULT_ADMIN_ROLE_CODE'] ?? null;
+        $defaultAdminRoleName = $_ENV['DEFAULT_ADMIN_ROLE_NAME'] ?? null;
 
         if ($defaultAdminUser && $defaultAdminRoleCode && $defaultAdminRoleName) {
             $adminUser = $this->manager->getRepository(AdminUserInterface::class)->findOneBy(['username' => $defaultAdminUser]);

@@ -1,0 +1,25 @@
+imports:
+    - { resource: "@ArobasesSyliusRightsManagementPlugin/Resources/config/config.yaml" }
+    - { resource: "services_test.php" }
+
+twig:
+    paths:
+        '%kernel.project_dir%/../../../tests/TestApplication/templates': ~
+
+doctrine:
+    orm:
+        entity_managers:
+            default:
+                mappings:
+                    TestApplication:
+                        is_bundle: false
+                        type: attribute
+                        dir: '%kernel.project_dir%/../../../tests/TestApplication/src/Entity'
+                        prefix: Tests\Arobases\SyliusRightsManagementPlugin\Entity
+
+sylius_user:
+    resources:
+        admin:
+            user:
+                classes:
+                    model: Tests\Arobases\SyliusRightsManagementPlugin\Entity\AdminUser

@@ -5,8 +5,10 @@ sylius_grid:
         name: doctrine/orm
         options:
           class: '%arobases_sylius_rights_management_plugin.model.role.class%'
-      sorting:
       fields:
+        code:
+          type: string
+          label: sylius.ui.code
         name:
           type: string
           label: sylius.ui.name

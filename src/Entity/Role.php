@@ -8,50 +8,36 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Sylius\Component\Resource\Model\CodeAwareInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Resource\Model\CodeAwareInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
-/**
- * @ORM\Entity
- *
- * @ORM\Table(name="arobases_sylius_right_management_role")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'arobases_sylius_right_management_role')]
 class Role implements ResourceInterface, CodeAwareInterface
 {
     use TimestampableEntity;
 
-    /** @ORM\Column(type="string", length=70) */
+    #[ORM\Column(type: 'string', length: 70)]
     protected ?string $code = null;
 
-    /**
-     * @ORM\Id()
-     *
-     * @ORM\GeneratedValue()
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected ?int $id = null;
 
-    /** @ORM\Column(type="string", length=100) */
+    #[ORM\Column(type: 'string', length: 100)]
     protected string $name;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Arobases\SyliusRightsManagementPlugin\Entity\Right",
-     *     mappedBy="roles", fetch="EXTRA_LAZY")
-     *
-     * @ORM\JoinTable(name="arobases_sylius_rights_management_right_role",
-     *      joinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="right_id", referencedColumnName="id")}
-     *      )
-     */
+    #[ORM\ManyToMany(targetEntity: Right::class, mappedBy: 'roles', fetch: 'EXTRA_LAZY')]
     protected Collection $rights;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Sylius\Component\Core\Model\AdminUserInterface",
-     *     mappedBy="role", fetch="EXTRA_LAZY",
-     *     cascade={"persist"}
-     *      )
-     */
+    #[ORM\OneToMany(
+        mappedBy: 'role',
+        targetEntity: AdminUserInterface::class,
+        cascade: ['persist'],
+        fetch: 'EXTRA_LAZY',
+    )]
     protected Collection $adminUsers;
 
     public function __construct()

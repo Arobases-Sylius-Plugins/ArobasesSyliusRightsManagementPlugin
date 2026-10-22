@@ -1,53 +1,13 @@
-arobases_sylius_rights_management_plugin_admin_role_index:
-  path: /role
-  methods: [GET]
-  defaults:
-    _controller: arobases_sylius_rights_management_plugin.controller.role::indexAction
-    _sylius:
-      permission: true
-      section: admin
-      grid: arobases_sylius_rights_management_plugin_role
-
-
-arobases_sylius_rights_management_plugin_admin_role_create:
-  path: /role/create
-  methods: [GET,POST]
-  defaults:
-    _controller: arobases_sylius_rights_management_plugin.controller.role::createAction
-    _sylius:
-      permission: true
-      section: admin
-      redirect: arobases_sylius_rights_management_plugin_admin_role_index
-      vars:
-        templates:
-          form: '@ArobasesSyliusRightsManagementPlugin/Admin/Role/form.html.twig'
-
-
-
-arobases_sylius_rights_management_plugin_admin_role_update:
-  path: /role/{id}/update
-  methods: [GET,PUT]
-  requirements:
-    id: \d+
-  defaults:
-    _controller: arobases_sylius_rights_management_plugin.controller.role::updateAction
-    _sylius:
-      permission: true
-      section: admin
-      redirect: arobases_sylius_rights_management_plugin_admin_role_update
-#      template: '@ArobasesSyliusCustomerSupportPlugin/Admin/Crud/update.html.twig'
-      vars:
-        templates:
-          form: '@ArobasesSyliusRightsManagementPlugin/Admin/Role/form.html.twig'
-
-arobases_sylius_rights_management_plugin_admin_role_delete:
-  path: /role/{id}/delete
-  methods: [DELETE]
-  requirements:
-    id: \d+
-  defaults:
-    _controller: arobases_sylius_rights_management_plugin.controller.role::deleteAction
-    _sylius:
-      permission: true
-      section: admin
-      redirect: arobases_sylius_rights_management_plugin_admin_role_index
+arobases_sylius_rights_management_plugin_admin_role:
+    resource: |
+        alias: arobases_sylius_rights_management_plugin.role
+        section: admin
+        templates: "@SyliusAdmin\\shared\\crud"
+        except: ['show', 'bulkDelete']
+        redirect: update
+        grid: arobases_sylius_rights_management_plugin_role
+        permission: true
+        vars:
+            all:
+                hook_prefix: 'arobases_sylius_rights_management_plugin.admin.role'
+    type: sylius.resource

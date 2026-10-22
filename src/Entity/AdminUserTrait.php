@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 trait AdminUserTrait
 {
     /**
+     * Annotations are kept for applications still mapping their entities with annotations.
+     *
      * @ORM\ManyToOne(targetEntity="Arobases\SyliusRightsManagementPlugin\Entity\Role",
      *     inversedBy="adminUsers",
      *     fetch="EXTRA_LAZY",
@@ -17,6 +19,8 @@ trait AdminUserTrait
      *
      * @ORM\JoinColumn(name="role_id", referencedColumnName="id", onDelete="SET NULL")
      */
+    #[ORM\ManyToOne(targetEntity: Role::class, cascade: ['persist'], fetch: 'EXTRA_LAZY', inversedBy: 'adminUsers')]
+    #[ORM\JoinColumn(name: 'role_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     protected ?Role $role = null;
 
     public function getRole(): ?Role

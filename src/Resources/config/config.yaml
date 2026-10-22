@@ -1,4 +1,5 @@
 imports:
   - { resource: "@ArobasesSyliusRightsManagementPlugin/Resources/config/resources.yaml" }
   - { resource: "@ArobasesSyliusRightsManagementPlugin/Resources/config/grids.yaml" }
+  - { resource: "@ArobasesSyliusRightsManagementPlugin/Resources/config/twig_hooks.yaml" }
   - { resource: "@ArobasesSyliusRightsManagementPlugin/Resources/config/right_management.yaml" }

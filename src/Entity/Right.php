@@ -8,56 +8,45 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
-/**
- * @ORM\Entity
- *
- * @ORM\Table(name="arobases_sylius_rights_management_right")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'arobases_sylius_rights_management_right')]
 class Right implements ResourceInterface
 {
     use TimestampableEntity;
 
-    /**
-     * @ORM\Id()
-     *
-     * @ORM\GeneratedValue()
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected ?int $id = null;
 
-    /** @ORM\Column(type="string", length=100) */
+    #[ORM\Column(type: 'string', length: 100)]
     protected string $name;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Arobases\SyliusRightsManagementPlugin\Entity\Role",
-     *     inversedBy="rights",
-     *     fetch="EXTRA_LAZY",
-     *      cascade={"persist", "remove"}
-     * )
-     *
-     * * @ORM\JoinTable(name="arobases_sylius_rights_management_right_role",
-     *      joinColumns={@ORM\JoinColumn(name="right_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
-     *      )
-     */
+    #[ORM\ManyToMany(
+        targetEntity: Role::class,
+        inversedBy: 'rights',
+        cascade: ['persist', 'remove'],
+        fetch: 'EXTRA_LAZY',
+    )]
+    #[ORM\JoinTable(name: 'arobases_sylius_rights_management_right_role')]
+    #[ORM\JoinColumn(name: 'right_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'role_id', referencedColumnName: 'id')]
     protected Collection $roles;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Arobases\SyliusRightsManagementPlugin\Entity\RightGroup",
-     *     inversedBy="rights",
-     *     fetch="EXTRA_LAZY",
-     *      cascade={"persist", "remove"}
-     * )
-     */
+    #[ORM\ManyToOne(
+        targetEntity: RightGroup::class,
+        cascade: ['persist', 'remove'],
+        fetch: 'EXTRA_LAZY',
+        inversedBy: 'rights',
+    )]
     protected ?RightGroup $rightGroup = null;
 
-    /** @ORM\Column(type="array", length=511, nullable=true) */
+    #[ORM\Column(type: 'json', nullable: true)]
     protected ?array $routes = null;
 
-    /** @ORM\Column(type="array", length=511, nullable=true) */
+    #[ORM\Column(type: 'json', nullable: true)]
     protected ?array $excludedRoutes = null;
 
     public function __construct()

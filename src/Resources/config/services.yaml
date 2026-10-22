@@ -40,7 +40,7 @@ services:
   arobases_sylius_rights_management_plugin.adapter.right_adapter:
     class: Arobases\SyliusRightsManagementPlugin\Adapter\RightAdapter
     arguments:
-      - '@service_container'
+      - '%arobases_sylius_rights_management%'
 
   arobases_sylius_rights_management_plugin.command.create_admin_right:
     class: Arobases\SyliusRightsManagementPlugin\Command\CreateAdminRightCommand
@@ -85,4 +85,4 @@ services:
     alias: arobases_sylius_rights_management_plugin.checker.admin_user_access_checker
 
   Arobases\SyliusRightsManagementPlugin\Access\Listener\AccessCheckListenerInterface:
-    alias: arobases_sylius_rights_management_plugin.listener.access_check_listener
+    alias: arobases_sylius_rights_management_plugin.listener.access_check_listener

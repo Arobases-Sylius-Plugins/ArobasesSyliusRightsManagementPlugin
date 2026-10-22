@@ -4,36 +4,35 @@ declare(strict_types=1);
 
 namespace Arobases\SyliusRightsManagementPlugin\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
-/**
- * @ORM\Entity
- *
- * @ORM\Table(name="arobases_sylius_rights_management_right_group")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'arobases_sylius_rights_management_right_group')]
 class RightGroup implements ResourceInterface
 {
-    /**
-     * @ORM\Id()
-     *
-     * @ORM\GeneratedValue()
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected ?int $id = null;
 
-    /** @ORM\Column(type="string", length=100) */
+    #[ORM\Column(type: 'string', length: 100)]
     protected string $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Arobases\SyliusRightsManagementPlugin\Entity\Right",
-     *     mappedBy="rightGroup", fetch="EXTRA_LAZY",
-     *     cascade={"persist", "remove"}
-     *      )
-     */
+    #[ORM\OneToMany(
+        mappedBy: 'rightGroup',
+        targetEntity: Right::class,
+        cascade: ['persist', 'remove'],
+        fetch: 'EXTRA_LAZY',
+    )]
     protected Collection $rights;
+
+    public function __construct()
+    {
+        $this->rights = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {

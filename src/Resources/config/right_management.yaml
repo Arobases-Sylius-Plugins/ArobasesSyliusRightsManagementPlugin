@@ -4,10 +4,11 @@ arobases_sylius_rights_management:
       rights:
         taxon:
           name: 'arobases_sylius_rights_management_plugin.rights.taxons'
-          routes: ['sylius_admin_taxon_*', 'sylius_admin_ajax_generate_taxon_slug']
+          routes: ['sylius_admin_taxon_*']
         product:
           name: 'arobases_sylius_rights_management_plugin.rights.products'
-          routes: ['sylius_admin_product_*', 'sylius_admin_get_product_attributes_*', 'sylius_admin_get_attribute_types', 'sylius_admin_ajax_generate_product_slug', 'sylius_admin_ajax_taxon_*', 'sylius_admin_ajax_product_*' ]
+          routes: ['sylius_admin_product_*', 'sylius_admin_ajax_product_*']
+          excludes: ['sylius_admin_product_attribute_*', 'sylius_admin_product_option_*', 'sylius_admin_product_association_type_*', 'sylius_admin_product_review_*']
         stock:
           name: 'arobases_sylius_rights_management_plugin.rights.inventory'
           routes: ['sylius_admin_inventory_*']
@@ -26,9 +27,11 @@ arobases_sylius_rights_management:
         order:
           name: 'arobases_sylius_rights_management_plugin.rights.orders'
           routes: ['sylius_admin_order_*', 'sylius_admin_payment_*', 'sylius_admin_shipment_*']
+          excludes: ['sylius_admin_payment_method_*']
         payment:
             name: 'arobases_sylius_rights_management_plugin.rights.payments'
             routes: ['sylius_admin_payment_*']
+            excludes: ['sylius_admin_payment_method_*']
         shipment:
             name: 'arobases_sylius_rights_management_plugin.rights.shipments'
             routes: ['sylius_admin_shipment_*']
@@ -36,7 +39,7 @@ arobases_sylius_rights_management:
       rights:
         customer:
           name: 'arobases_sylius_rights_management_plugin.rights.customers'
-          routes: [ 'sylius_admin_customer_*', 'sylius_admin_impersonate_*' ]
+          routes: [ 'sylius_admin_customer_*', 'sylius_admin_impersonate_*', 'sylius_admin_shop_user_*' ]
           excludes: [ 'sylius_admin_customer_group_*' ]
         group:
           name: 'arobases_sylius_rights_management_plugin.rights.customer_groups'
@@ -74,7 +77,7 @@ arobases_sylius_rights_management:
           routes: ['sylius_admin_locale_*']
         payment_method:
           name: 'arobases_sylius_rights_management_plugin.rights.payment_methods'
-          routes: ['sylius_admin_payment_method_*', 'sylius_admin_get_payment_gateways']
+          routes: ['sylius_admin_payment_method_*']
         shipping_method:
           name: 'arobases_sylius_rights_management_plugin.rights.shipping_methods'
           routes: ['sylius_admin_shipping_method_*', 'webgriffe_admin_shipping_table_rate_*']

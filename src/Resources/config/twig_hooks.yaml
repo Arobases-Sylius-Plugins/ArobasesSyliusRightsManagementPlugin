@@ -1,0 +1,28 @@
+sylius_twig_hooks:
+    hooks:
+        'arobases_sylius_rights_management_plugin.admin.role.create.content.form.sections':
+            general:
+                template: '@ArobasesSyliusRightsManagementPlugin/admin/role/form/sections/general.html.twig'
+                priority: 100
+            rights:
+                template: '@ArobasesSyliusRightsManagementPlugin/admin/role/form/sections/rights.html.twig'
+                priority: 0
+
+        'arobases_sylius_rights_management_plugin.admin.role.update.content.form.sections':
+            general:
+                template: '@ArobasesSyliusRightsManagementPlugin/admin/role/form/sections/general.html.twig'
+                priority: 100
+            rights:
+                template: '@ArobasesSyliusRightsManagementPlugin/admin/role/form/sections/rights.html.twig'
+                priority: 0
+
+        # Replaces the Sylius Plus "Roles" placeholder of the administrator form
+        'sylius_admin.admin_user.create.content.form.sections#left':
+            roles:
+                template: '@ArobasesSyliusRightsManagementPlugin/admin/admin_user/form/sections/role.html.twig'
+                priority: -100
+
+        'sylius_admin.admin_user.update.content.form.sections#left':
+            roles:
+                template: '@ArobasesSyliusRightsManagementPlugin/admin/admin_user/form/sections/role.html.twig'
+                priority: -100
