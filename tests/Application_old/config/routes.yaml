@@ -1,3 +1,0 @@
-arobases_sylius_rights_management_plugin_admin:
-    resource: "@ArobasesSyliusRightsManagementPlugin/Resources/config/admin_routing.yml"
-    prefix: /admin
